@@ -2,6 +2,7 @@ use crate::reducible::Reducible;
 use crate::ucum_unit::UcumUnit;
 use crate::unit::Unit;
 
+#[cfg_attr(feature = "cffi", ffi_derive::expose_impl)]
 impl UcumUnit for Unit {
     /// The UCUM defines "special units" as:
     ///

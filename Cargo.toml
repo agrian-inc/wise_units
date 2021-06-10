@@ -6,17 +6,22 @@ members = [
   "ffi",
 ]
 
-# [patch."agrian-registry".ffi_common]
-# # path = "../ffi_common/ffi_common"
-# git = "ssh://git@github.com/agrian-inc/ffi_common.git"
-# branch = "develop"
+[patch."agrian-registry".ffi_common]
+# path = "../ffi_common/ffi_common"
+git = "ssh://git@github.com/agrian-inc/ffi_common.git"
+branch = "feature/DEV-15926_agrian_units_support"
 
-# [patch."agrian-registry".ffi_consumer]
-# # path = "../ffi_common/ffi_consumer"
-# git = "ssh://git@bitbucket.org/agrian/ffi_common.git"
-# branch = "develop"
+[patch."agrian-registry".ffi_consumer]
+# path = "../ffi_common/ffi_consumer"
+git = "ssh://git@bitbucket.org/agrian/ffi_common.git"
+branch = "feature/DEV-15926_agrian_units_support"
 
-# [patch."agrian-registry".ffi_derive]
-# # path = "../ffi_common/ffi_derive"
-# git = "ssh://git@github.com/agrian-inc/ffi_common.git"
-# branch = "develop"
+[patch."agrian-registry".ffi_derive]
+# path = "../ffi_common/ffi_derive"
+git = "ssh://git@github.com/agrian-inc/ffi_common.git"
+branch = "feature/DEV-15926_agrian_units_support"
+
+[patch."agrian-registry".ffi_internals]
+# path = "../ffi_common/ffi_internals"
+git = "ssh://git@github.com/agrian-inc/ffi_common.git"
+branch = "feature/DEV-15926_agrian_units_support"

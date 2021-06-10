@@ -6,6 +6,7 @@ use std::ops::{Add, Div, Mul, Sub};
 //-----------------------------------------------------------------------------
 // impl Add
 //-----------------------------------------------------------------------------
+#[cfg_attr(feature = "cffi",ffi_derive::expose_fn)]
 fn add_measurements(lhs: &Measurement, rhs: &Measurement) -> Result<Measurement, Error> {
     let rhs_converted = rhs.convert_to(&lhs.unit)?;
     let new_value = lhs.value + rhs_converted.value;
@@ -55,6 +56,7 @@ impl<'a> Add<Measurement> for &'a Measurement {
 //-----------------------------------------------------------------------------
 // impl Sub
 //-----------------------------------------------------------------------------
+#[cfg_attr(feature = "cffi",ffi_derive::expose_fn)]
 fn sub_measurements(lhs: &Measurement, rhs: &Measurement) -> Result<Measurement, Error> {
     let rhs_converted = rhs.convert_to(&lhs.unit)?;
     let new_value = lhs.value - rhs_converted.value;
@@ -104,6 +106,7 @@ impl<'a> Sub<Measurement> for &'a Measurement {
 //-----------------------------------------------------------------------------
 // impl Mul
 //-----------------------------------------------------------------------------
+#[cfg_attr(feature = "cffi",ffi_derive::expose_fn)]
 fn mul_measurements(lhs: &Measurement, rhs: &Measurement) -> Measurement {
     let converted_rhs = rhs.convert_to(&lhs.unit);
     let actual_rhs = converted_rhs.as_ref().unwrap_or(rhs);
@@ -186,6 +189,7 @@ impl<'a> Mul<f64> for &'a Measurement {
 //-----------------------------------------------------------------------------
 // impl Div
 //-----------------------------------------------------------------------------
+#[cfg_attr(feature = "cffi",ffi_derive::expose_fn)]
 fn div_measurements(lhs: &Measurement, rhs: &Measurement) -> Measurement {
     let converted_rhs = rhs.convert_to(&lhs.unit);
     let actual_rhs = converted_rhs.as_ref().unwrap_or(rhs);
