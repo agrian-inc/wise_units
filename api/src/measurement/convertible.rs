@@ -6,6 +6,7 @@ use std::str::FromStr;
 /// is invalid, you'll get an `Error`. If `self`'s `Unit` and `other_unit` are
 /// incompatible, you'll get an `Error`.
 ///
+#[cfg_attr(feature = "cffi", ffi_derive::expose_impl)]
 impl<'a> Convertible<&'a str> for Measurement {
     type Output = Self;
     type ConversionError = Error;
@@ -15,6 +16,22 @@ impl<'a> Convertible<&'a str> for Measurement {
         let other_unit = Unit::from_str(expression)?;
 
         convert_measurement(self, &other_unit)
+    }
+}
+
+pub unsafe extern "C" fn convertible_measurement_ffi_convert_to2(
+    measurement: *const Measurement,
+    expression: *const std::os::raw::c_char,
+) -> *const Measurement {
+    let data = (*measurement).clone();
+    let expression: String = ffi_common::string::string_from_c(expression);
+    let return_value = data.convert_to(&*expression);
+    match return_value.map(|r| Box::into_raw(Box::new(r.clone()))) {
+        Ok(val) => val,
+        Err(error) => {
+            ::ffi_common::error::set_last_err_msg(error.to_string().as_str());
+            std::ptr::null()
+        }
     }
 }
 
