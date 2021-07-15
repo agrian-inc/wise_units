@@ -11,6 +11,7 @@ impl<'a, 'b> IsCompatibleWith<&'b [Term]> for &'a Unit {
     }
 }
 
+#[cfg_attr(feature = "cffi", ffi_derive::expose_impl)]
 impl<'a, 'b> IsCompatibleWith<&'b Unit> for &'a Unit {
     #[inline]
     fn is_compatible_with(self, rhs: &'b Unit) -> bool {

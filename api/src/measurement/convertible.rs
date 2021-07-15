@@ -19,22 +19,6 @@ impl<'a> Convertible<&'a str> for Measurement {
     }
 }
 
-pub unsafe extern "C" fn convertible_measurement_ffi_convert_to2(
-    measurement: *const Measurement,
-    expression: *const std::os::raw::c_char,
-) -> *const Measurement {
-    let data = (*measurement).clone();
-    let expression: String = ffi_common::string::string_from_c(expression);
-    let return_value = data.convert_to(&*expression);
-    match return_value.map(|r| Box::into_raw(Box::new(r.clone()))) {
-        Ok(val) => val,
-        Err(error) => {
-            ::ffi_common::error::set_last_err_msg(error.to_string().as_str());
-            std::ptr::null()
-        }
-    }
-}
-
 /// This implementation of `Convertible` skips any string parsing and gets
 /// right to converting to `other_unit`. If `self`'s `Unit` and `other_unit`
 /// are incompatible, you'll get an `Error`.

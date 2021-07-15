@@ -10,6 +10,7 @@ impl<'a, 'b> IsCompatibleWith<&'b Measurement> for &'a Measurement {
     }
 }
 
+#[cfg_attr(feature = "cffi", ffi_derive::expose_impl)]
 impl<'a, 'b> IsCompatibleWith<&'b Unit> for &'a Measurement {
     #[inline]
     fn is_compatible_with(self, rhs: &'b Unit) -> bool {

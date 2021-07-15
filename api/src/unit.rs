@@ -26,7 +26,12 @@ use ffi_derive::FFI;
 
 use crate::parser::Term;
 
-#[cfg_attr(feature = "cffi", derive(FFI), ffi(custom = "src/unit/custom_ffi.rs"))]
+#[cfg_attr(
+    feature = "cffi",
+     derive(FFI), 
+     ffi(custom = "src/unit/custom_ffi.rs", 
+     failable_init,
+     failable_fns(custom_ffi::get_unit_expression, custom_ffi::get_unit_expression)))]
 #[derive(Clone, Debug)]
 pub struct Unit {
     pub terms: Vec<Term>,
